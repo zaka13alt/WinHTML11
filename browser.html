@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microsoft Edge Interface</title>
+    <title>browser</title>
     <style>
         /* Base Reset */
         * {
@@ -294,8 +294,8 @@
     </div>
 
     <script>
-        // Config base proxy string
-        const PROXY_DOMAIN = "https://vultureserver.onrender.com/";
+        // 
+        const PROXY_DOMAIN = "https://gcore.jsdelivr.net/gh/BestSpark687090/sj_singlefile@main/proxy-single.svg?goto=";
 
         const tabsContainer = document.getElementById('tabs-container');
         const contentArea = document.getElementById('content-area');
@@ -304,12 +304,12 @@
         let tabList = [];
         let activeTabId = null;
 
-        // Custom template for Edge SVG Icon
+        // 
         const edgeIconSvg = `<svg class="tab-icon" viewBox="0 0 128 128"><path fill="#0c59a4" d="M64 4C30.9 4 4 30.9 4 64s26.9 60 60 60 60-26.9 60-60S97.1 4 64 4zm22 76c-4.4 7.8-11.6 13-20 14-16.5 2-30-10.5-30-27 0-14.5 10.5-25.5 25-27 10.5-1.1 19.5 4.4 23 13.5H53c-6.6 0-12 5.4-12 12s5.4 12 12 12h35c1.1 0 2-.9 2-2V78c0-1.1-.9-2-2-2z"/></svg>`;
 
-        // Render layout tabs and sync frames
+        // 
         function renderTabs() {
-            // Clear prior dynamic lists except the add button
+            // 
             tabsContainer.innerHTML = '';
 
             tabList.forEach(tab => {
@@ -331,7 +331,7 @@
                     switchTab(tab.id);
                 });
 
-                // Handle tab close click action
+                // 
                 tabEl.querySelector('.tab-close').addEventListener('click', (e) => {
                     e.stopPropagation();
                     closeTab(tab.id);
@@ -340,7 +340,7 @@
                 tabsContainer.appendChild(tabEl);
             });
 
-            // Re-append the New Tab Button element at the end
+            // 
             const newTabBtn = document.createElement('div');
             newTabBtn.className = 'new-tab-btn';
             newTabBtn.textContent = '＋';
@@ -348,7 +348,7 @@
             tabsContainer.appendChild(newTabBtn);
         }
 
-        // Add a brand-new website instance tab
+        // 
         function createNewTab(initialUrl = '') {
             const id = 'tab_' + Math.random().toString(36).substr(2, 9);
             
@@ -360,7 +360,7 @@
 
             tabList.push(newTab);
 
-            // Generate matching Frame element viewport
+            // 
             const iframe = document.createElement('iframe');
             iframe.id = `frame_${id}`;
             iframe.className = 'web-view';
@@ -370,15 +370,15 @@
             updateFrameUrl(id, initialUrl);
         }
 
-        // Switch workspace visualization frame
+        //
         function switchTab(id) {
             activeTabId = id;
             const targetTab = tabList.find(t => t.id === id);
 
-            // Update visible input text
+            // 
             urlInput.value = targetTab ? targetTab.url : '';
 
-            // Toggle frames class active lists
+            // 
             document.querySelectorAll('.web-view').forEach(frame => {
                 frame.classList.remove('active');
             });
@@ -391,22 +391,22 @@
             renderTabs();
         }
 
-        // Close selected dynamic item 
+        // 
         function closeTab(id) {
             const index = tabList.findIndex(t => t.id === id);
             if (index === -1) return;
 
-            // Delete actual workspace frames element node
+            // 
             const targetFrame = document.getElementById(`frame_${id}`);
             if (targetFrame) targetFrame.remove();
 
-            // Extract item from list arrays
+            // 
             tabList.splice(index, 1);
 
-            // Calculate state if closing currently looked at item
+            // 
             if (activeTabId === id) {
                 if (tabList.length > 0) {
-                    // Fall back to nearby item arrays
+                    //
                     const nextActiveId = tabList[index] ? tabList[index].id : tabList[index - 1].id;
                     switchTab(nextActiveId);
                 } else {
@@ -419,7 +419,7 @@
             }
         }
 
-        // Handles conditional logic for empty URLs versus active URLs
+        //
         function updateFrameUrl(id, rawUrl) {
             const targetTab = tabList.find(t => t.id === id);
             if (!targetTab) return;
@@ -430,10 +430,10 @@
             const currentFrame = document.getElementById(`frame_${id}`);
             if (currentFrame) {
                 if (rawUrl === '') {
-                    // If no URL has been entered yet, look at the root system file template
+                    // 
                     currentFrame.src = '/newtab.html';
                 } else {
-                    // Strict direct string combination logic
+                   
                     currentFrame.src = PROXY_DOMAIN + rawUrl;
                 }
             }
@@ -447,7 +447,7 @@
                 if (activeTabId) {
                     updateFrameUrl(activeTabId, this.value.trim());
                 } else {
-                    // Automatically open up string context inside a new tab structure
+                    
                     createNewTab(this.value.trim());
                 }
                 this.blur();
@@ -462,7 +462,7 @@
             }
         }
 
-        // Start out with a clean blank tab session on start
+        
         createNewTab('');
     </script>
 </body>
